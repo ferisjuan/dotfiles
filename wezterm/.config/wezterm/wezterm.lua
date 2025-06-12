@@ -59,7 +59,7 @@ if wezterm.config_builder then
 end
 
 --#region Configuration
-config.color_scheme = "Tokyo Night"
+config.color_scheme = "Catppuccin Macchiato (Gogh)"
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.font_size = 18
 config.line_height = 1.05
