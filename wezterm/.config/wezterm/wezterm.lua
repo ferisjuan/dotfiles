@@ -228,7 +228,7 @@ config.tab_and_split_indices_are_zero_based = true
 for i = 0, 9 do
 	table.insert(config.keys, {
 		key = tostring(i),
-		mods = "LEADER",
+		mods = "WIN",
 		action = act.ActivateTab(i),
 	})
 end
