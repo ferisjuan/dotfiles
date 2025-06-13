@@ -108,7 +108,7 @@ export PATH=/opt/homebrew/bin:$PATH
 export REACT_EDITOR="nv"
 
 # Tokens
-[ -f ~/.tokens ] || source ~/.tokens
+[ -f ~/.tokens ] && source ~/.tokens
 
 # Lazy
 lazynvm() {
