@@ -1,29 +1,80 @@
-# source
-if [ -e ~/.tokens ]; then
-  source ~/.tokens
-fi
+# Setup Zinit Home
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 
-source <(fzf --zsh)
-source $HOME/.config/zsh-plugins/zsh-autocomplete/zsh-autocomplete.plugin.zsh
-source $HOME/.config/zsh-plugins/zsh-completions/zsh-completions.plugin.zsh
-source $HOME/.config/zsh-plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# Download Zinit if not there yet
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 
-autoload -Uz compinit
-compinit
+# Source Zinit
+source "${ZINIT_HOME}/zinit.zsh"
+
+# ice adds a temporary modifier to a next zinit command
+# Load starship theme
+# line 1: `starship` binary as command, from github release
+# line 2: starship setup at clone(create init.zsh, completion)
+# line 3: pull behavior same as clone, source init.zsh
+zinit ice as"command" from"gh-r" \
+          atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
+          atpull"%atclone" src"init.zsh"
+zinit light starship/starship
+
+# Load completions
+autoload -U compinit && compinit
+
+# Cache completions
+zinit cdreplay -q
+
+# Shell integration
+[ ! -e /opt/homebrew/bin/fzf ] &&  brew install fzf
+eval "$(fzf --zsh)"
+[ ! -e /opt/homebrew/bin/zoxide ] && brew install zoxide
+eval "$(zoxide init zsh)"
+[ ! -e /opt/homebrew/bin/zoxide ] && brew install rbenv
+eval "$(rbenv init - zsh)"
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-completions
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+enable-fzf-tab;
+
+# Keybindings
+bindkey -e
+bindkey "^p" history-search-backward
+bindkey "^n" history-search-forward
+bindkey '\t' complete-word # "tab"
+
+# History
+HISTSIZE=5000
+HISTFILE=~/.zsh_history
+SAVEHIST=$HISTSIZE
+HISTDUP=erase
+setopt appendhistory
+setopt hist_ignore_all_dups
+setopt hist_ignore_dups
+setopt hist_ignore_space
+setopt hist_save_no_dups
+setopt sharehistory
+setopt hist_find_no_dups
+
+# Completion styling
+zstyle ':completion:*' menu no
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+zstyle ':completion:*:git-checkout:*' sort false
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
+zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
+zstyle ':fzf-tab:*' switch-group '<' '>'
+
+# Add in snippets
+zinit snippet OMZP::git
 
 # Alias
 alias c="clear"
-alias gaa="git add ."
-alias gca="git commit --amend --no-edit"
-alias gcanv="git commit --amend --no-edit --no-verify"
-alias gma="git merge --abort"
-alias gmc="git merge --continue"
-alias gmm="git merge main"
-alias gra="git rebase --abort"
-alias grc="git rebase --continue"
-alias gst="git status"
-alias gsw="git switch"
-alias gswm="git switch main"
 alias ll="ls"
 alias lla="ls -a"
 alias ls="eza --icons=always"
@@ -56,13 +107,8 @@ export PATH=/opt/homebrew/bin:$PATH
 # Editor
 export REACT_EDITOR="nv"
 
-# ENCODING
-export LANG=en_US.UTF-8
-
-# Evals
-eval "$(zoxide init zsh)"
-eval "$(rbenv init - zsh)"
-eval "$(starship init zsh)"
+# Tokens
+[ -f ~/.tokens ] || source ~/.tokens
 
 # Lazy
 lazynvm() {
