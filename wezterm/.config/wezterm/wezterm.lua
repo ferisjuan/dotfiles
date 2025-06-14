@@ -37,16 +37,7 @@ end)
 -- end region
 
 -- add your workspaces here
-local projects = {
-	{
-		name = "Customer Payment Service",
-		cwd = "/wps/IH/customer-payments-service",
-	},
-	{
-		name = "Resident Payments Website",
-		cwd = "/wps/IH/resident-payments-website",
-	},
-}
+local projects = require("projects")
 
 --region plugins
 local bar = wezterm.plugin.require("https://github.com/adriankarlen/bar.wezterm")
