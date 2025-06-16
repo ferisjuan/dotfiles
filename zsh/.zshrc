@@ -39,7 +39,7 @@ zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
 
-enable-fzf-tab;
+eval "$(enable-fzf-tab)";
 
 # Keybindings
 bindkey -e
@@ -110,31 +110,6 @@ export REACT_EDITOR="nv"
 # Tokens
 [ -f ~/.tokens ] && source ~/.tokens
 
-# Lazy
-lazynvm() {
-  unset -f nvm node npm
-  export NVM_DIR=~/.nvm
-  [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm use --lts
-}
-
-nvm() {
-  lazynvm 
-  nvm $@
-}
- 
-node() {
-  lazynvm
-  node $@
-}
- 
-npm() {
-  lazynvm
-  npm $@
-}
-
-npx() {
-  lazynvm
-  npx $@
-}

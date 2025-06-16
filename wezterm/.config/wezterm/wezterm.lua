@@ -36,9 +36,6 @@ wezterm.on("window-config-reloaded", function(window, pane)
 end)
 -- end region
 
--- add your workspaces here
-local projects = require("projects")
-
 --region plugins
 local bar = wezterm.plugin.require("https://github.com/adriankarlen/bar.wezterm")
 local resurrect = wezterm.plugin.require("https://github.com/MLFlexer/resurrect.wezterm")
@@ -255,12 +252,18 @@ wezterm.on("gui-startup", function(cmd)
 	-- Wezterm config
 	local cfg_tab, cfg_pane = mux.spawn_window({
 		workspace = "Config",
-		cwd = wezterm.home_dir,
+		cwd = wezterm.home_dir .. "datfiles",
 		args = args,
 	})
 
 	cfg_tab:set_title("Dotfiles config")
-	cfg_pane:send_text("nv ~/dotfiles\n")
+	cfg_pane:send_text("cd ~/dotfiles\n")
+	cfg_pane:send_text("nv\n")
+
+	-- add your workspaces here
+	local projects = require("projects")
+
+	print(wezterm.home_dir)
 
 	for _, v in ipairs(projects) do
 		local local_dir = wezterm.home_dir .. v.cwd
