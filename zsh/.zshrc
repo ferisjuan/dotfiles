@@ -25,11 +25,23 @@ autoload -U compinit && compinit
 zinit cdreplay -q
 
 # Shell integration
-[ ! -e /opt/homebrew/bin/fzf ] &&  brew install fzf
-eval "$(fzf --zsh)"
-[ ! -e /opt/homebrew/bin/zoxide ] && brew install zoxide
+if [[ ! -e /opt/homebrew/bin/fzf ]]
+then
+    brew install fzf
+fi
+
+if [[ ! -e /opt/homebrew/bin/zoxide ]]
+then
+  brew install zoxide
+fi
+
+if [[ ! -e /opt/homebrew/bin/zoxide ]]
+then
+  brew install rbenv
+fi
+
 eval "$(zoxide init zsh)"
-[ ! -e /opt/homebrew/bin/zoxide ] && brew install rbenv
+eval "$(fzf --zsh)"
 eval "$(rbenv init - zsh)"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
