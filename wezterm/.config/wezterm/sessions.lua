@@ -11,39 +11,36 @@ wezterm.on("gui-startup", function(cmd)
 
 	-- Wezterm config
 	local cfg_tab, cfg_pane = mux.spawn_window({
-		workspace = "Config",
-		cwd = wezterm.home_dir .. "dotfiles",
+		workspace = "dotfiles",
+		cwd = wezterm.home_dir .. "/dotfiles",
 		args = args,
 	})
 
-	cfg_tab:set_title("Dotfiles config")
-	cfg_pane:send_text("cd ~/dotfiles\n")
+	cfg_tab:set_title("Editor")
 	cfg_pane:send_text("nv\n")
 
 	-- add your workspaces here
 	local projects = require("projects")
 
-	print(wezterm.home_dir)
-
 	for _, v in ipairs(projects) do
 		local local_dir = wezterm.home_dir .. v.cwd
-		local tab, editor_pane, window = mux.spawn_window({
+		local project_tab, project_pane, project_window = mux.spawn_window({
 			workspace = v.name,
 			cwd = local_dir,
 			args = args,
 			height = 200,
-			width = 300,
+			width = 200,
 		})
 
-		tab:set_title(v.name)
-		editor_pane:send_text("nv\n")
-		-- local term_pane = editor_pane:split({ direction = "Right", size = 0.4 })
-		-- term_pane:send_text("sz\n")
-		-- term_pane:split({ direction = "Bottom", size = 0.3 })
-		-- editor_pane:activate()
-		local term_tab = window:spawn_tab({ cwd = local_dir })
+		project_tab:set_title("Editor")
+		project_pane:send_text("nv\n")
+
+		local term_tab = project_window:spawn_tab({ cwd = local_dir })
 		term_tab:set_title("Term")
+
+		local term_pane = term_tab:active_pane()
+		term_pane:split({ direction = "Top", size = 0.6 })
 	end
 
-	mux.set_active_workspace("Resident Payment Website")
+	mux.set_active_workspace("dotfiles")
 end)
