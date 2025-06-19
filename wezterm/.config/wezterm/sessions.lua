@@ -12,7 +12,7 @@ wezterm.on("gui-startup", function(cmd)
 	-- Wezterm config
 	local cfg_tab, cfg_pane = mux.spawn_window({
 		workspace = "Config",
-		cwd = wezterm.home_dir .. "datfiles",
+		cwd = wezterm.home_dir .. "dotfiles",
 		args = args,
 	})
 
@@ -31,17 +31,19 @@ wezterm.on("gui-startup", function(cmd)
 			workspace = v.name,
 			cwd = local_dir,
 			args = args,
-			height = 100,
+			height = 200,
 			width = 300,
 		})
 
 		tab:set_title(v.name)
-		tab:set_title("Editor")
 		editor_pane:send_text("nv\n")
+		-- local term_pane = editor_pane:split({ direction = "Right", size = 0.4 })
+		-- term_pane:send_text("sz\n")
+		-- term_pane:split({ direction = "Bottom", size = 0.3 })
+		-- editor_pane:activate()
 		local term_tab = window:spawn_tab({ cwd = local_dir })
 		term_tab:set_title("Term")
-		term_tab:split({ direction = "Right", size = 0.4 })
 	end
 
-	mux.set_active_workspace(projects[0].name)
+	mux.set_active_workspace("Resident Payment Website")
 end)
