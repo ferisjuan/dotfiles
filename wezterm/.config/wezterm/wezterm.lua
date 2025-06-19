@@ -4,6 +4,8 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 local mux = wezterm.mux
 
+require("sessions")
+
 -- region toggle-opacity
 wezterm.on("toggle-opacity", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
