@@ -24,22 +24,6 @@ autoload -U compinit && compinit
 # Cache completions
 zinit cdreplay -q
 
-# Shell integration
-if [[ ! -e /opt/homebrew/bin/fzf ]]
-then
-    brew install fzf
-fi
-
-if [[ ! -e /opt/homebrew/bin/zoxide ]]
-then
-  brew install zoxide
-fi
-
-if [[ ! -e /opt/homebrew/bin/zoxide ]]
-then
-  brew install rbenv
-fi
-
 eval "$(zoxide init zsh)"
 eval "$(fzf --zsh)"
 eval "$(rbenv init - zsh)"
@@ -50,8 +34,6 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light zsh-users/zsh-autosuggestions
 zinit light Aloxaf/fzf-tab
-
-eval "$(enable-fzf-tab)";
 
 # Keybindings
 bindkey -e
@@ -122,12 +104,32 @@ export REACT_EDITOR="nv"
 # Tokens
 [ -f ~/.tokens ] && source ~/.tokens
 
-[ ! -e /opt/homebrew/opt/nvm/nvm.sh ] && brew install nvm
-if [[ -e /opt/homebrew/opt/nvm/nvm.sh ]]; then
-  export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm use --lts
-fi
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+#
+typeset -ga __lazyLoadLabels=(nvm node npm npx pnpm yarn pnpx bun bunx)
 
+__load-nvm() {
+    export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
 
+    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+}
+
+__work() {
+    for label in "${__lazyLoadLabels[@]}"; do
+        unset -f $label
+    done
+    unset -v __lazyLoadLabels
+
+    __load-nvm
+    unset -f __load-nvm __work
+}
+
+for label in "${__lazyLoadLabels[@]}"; do
+    eval "$label() { __work; $label \$@; }"
+done
+
+nvm use --lts
+eval enable-fzf-tab;

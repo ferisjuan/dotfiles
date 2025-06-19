@@ -8,8 +8,9 @@ brew install stow
 
 ## Install symbolic links
 
-Run in the `stow [dotfile-name]`, e.g.:
+Modify and Run in the `install-[os].sh`, e.g.:
 
 ```Term
-stow nvim
+chmod +x install.sh
+./install-mac.sh
 ```
