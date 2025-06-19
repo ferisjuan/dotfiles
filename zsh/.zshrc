@@ -115,6 +115,8 @@ __load-nvm() {
 
     [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
     [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+
+  nvm use --lts
 }
 
 __work() {
@@ -131,5 +133,4 @@ for label in "${__lazyLoadLabels[@]}"; do
     eval "$label() { __work; $label \$@; }"
 done
 
-nvm use --lts
 eval enable-fzf-tab;
