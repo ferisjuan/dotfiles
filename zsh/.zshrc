@@ -104,33 +104,34 @@ export REACT_EDITOR="nv"
 # Tokens
 [ -f ~/.tokens ] && source ~/.tokens
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-# [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+export NVM_DIR="$HOME/.nvm"
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+nvm use --lts
+
+# typeset -ga __lazyLoadLabels=(nvm node npm npx pnpm yarn pnpx bun bunx)
 #
-typeset -ga __lazyLoadLabels=(nvm node npm npx pnpm yarn pnpx bun bunx)
-
-__load-nvm() {
-    export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
-
-    [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
-    [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
-
-  nvm use --lts
-}
-
-__work() {
-    for label in "${__lazyLoadLabels[@]}"; do
-        unset -f $label
-    done
-    unset -v __lazyLoadLabels
-
-    __load-nvm
-    unset -f __load-nvm __work
-}
-
-for label in "${__lazyLoadLabels[@]}"; do
-    eval "$label() { __work; $label \$@; }"
-done
+# __load-nvm() {
+#     export NVM_DIR="${NVM_DIR:-$HOME/.nvm}"
+#
+#     [ -s "$NVM_DIR/nvm.sh" ] && source "$NVM_DIR/nvm.sh"
+#     [ -s "$NVM_DIR/bash_completion" ] && source "$NVM_DIR/bash_completion"
+#
+#   nvm use --lts
+# }
+#
+# __work() {
+#     for label in "${__lazyLoadLabels[@]}"; do
+#         unset -f $label
+#     done
+#     unset -v __lazyLoadLabels
+#
+#     __load-nvm
+#     unset -f __load-nvm __work
+# }
+#
+# for label in "${__lazyLoadLabels[@]}"; do
+#     eval "$label() { __work; $label \$@; }"
+# done
 
 eval enable-fzf-tab;
