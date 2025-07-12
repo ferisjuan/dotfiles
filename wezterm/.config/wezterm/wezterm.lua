@@ -60,7 +60,7 @@ config.window_padding = {
 --#endregion
 
 --#region keybinding
-config.leader = { key = "h", mods = "ALT", timeout_milliseconds = 2000 }
+config.leader = { key = "h", mods = "CMD", timeout_milliseconds = 2000 }
 
 config.keys = {
 	{ mods = "LEADER", key = "b", action = wezterm.action.EmitEvent("toggle-opacity") },
