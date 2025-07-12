@@ -47,7 +47,7 @@ if wezterm.config_builder then
 end
 
 --#region Configuration
-config.color_scheme = "nord"
+config.color_scheme = "Everforest Dark (Gogh)"
 config.font = wezterm.font("Hack Nerd Font Mono")
 config.font_size = 18
 config.line_height = 1.05
