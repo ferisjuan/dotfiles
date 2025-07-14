@@ -16,20 +16,17 @@ wezterm.on("toggle-opacity", function(window, pane)
 end)
 -- end region
 
--- region toggle-ligature
-wezterm.on("toggle-ligature", function(window, pane)
-	local overrides = window:get_config_overrides() or {}
-	if not overrides.harfbuzz_features then
-		-- If we haven't overridden it yet, then override with ligatures disabled
-		overrides.harfbuzz_features = { "calt=0", "clig=0", "liga=0" }
-	else
-		-- else we did already, and we should disable out override now
-		overrides.harfbuzz_features = nil
-	end
-	window:set_config_overrides(overrides)
-end)
+-- region fonts
+config.font = wezterm.font_with_fallback({
+	{
+		family = "Hack Nerd Font Mono",
+		weight = "Medium",
+		harfbuzz_features = { "calt=0", "clig=0", "liga=1" },
+	},
+	{ family = "FiraCode Nerd Font Mono", weight = "Medium", harfbuzz_features = { "calt=0", "clig=0", "liga=1" } },
+})
 -- end region
---
+
 -- region toast position
 wezterm.on("window-config-reloaded", function(window, pane)
 	window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
@@ -64,7 +61,6 @@ config.leader = { key = "h", mods = "CMD", timeout_milliseconds = 2000 }
 
 config.keys = {
 	{ mods = "LEADER", key = "b", action = wezterm.action.EmitEvent("toggle-opacity") },
-	{ mods = "LEADER", key = "e", action = wezterm.action.EmitEvent("toggle-ligature") },
 	{
 		mods = "LEADER",
 		key = "c",
