@@ -8,3 +8,10 @@ tRPC
 Fastify
 backend
 pnpm
+Redis
+BullMQ
+js
+UIs
+WebSockets
+frontend
+WebSocket
