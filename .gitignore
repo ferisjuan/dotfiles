@@ -1,3 +1,4 @@
 wezterm/.config/wezterm/projects.lua
 nvim/.config/nvim/lazy-lock.json
 nvim/.config/nvim/lazyvim.json
+env/
