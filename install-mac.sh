@@ -5,7 +5,7 @@ if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm")
+programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm" "luaver")
 for program in "${programs[@]}"; do
   echo "Looking out for $program..."
   if [ command -v "$program" ] >/dev/null 2>&1; then
