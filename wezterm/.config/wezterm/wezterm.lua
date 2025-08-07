@@ -16,17 +16,6 @@ wezterm.on("toggle-opacity", function(window, pane)
 end)
 -- end region
 
--- region fonts
-config.font = wezterm.font_with_fallback({
-	{
-		family = "Hack Nerd Font Mono",
-		weight = "Medium",
-		harfbuzz_features = { "calt=0", "clig=0", "liga=1" },
-	},
-	{ family = "FiraCode Nerd Font Mono", weight = "Medium", harfbuzz_features = { "calt=0", "clig=0", "liga=1" } },
-})
--- end region
-
 -- region toast position
 wezterm.on("window-config-reloaded", function(window, pane)
 	window:toast_notification("wezterm", "configuration reloaded!", nil, 4000)
@@ -46,8 +35,10 @@ end
 --#region Configuration
 config.color_scheme = "Everforest Dark (Gogh)"
 config.font = wezterm.font("Hack Nerd Font Mono")
+-- config.font = wezterm.font("JetBrains Mono")
+-- config.font = wezterm.font("FiraCode Nerd Font Mono")
 config.font_size = 18
-config.line_height = 1.05
+config.line_height = 1.08
 config.window_padding = {
 	left = 0,
 	right = 0,
