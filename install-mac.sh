@@ -16,6 +16,19 @@ for program in "${programs[@]}"; do
   fi
 done
 
+# cask
+
+cask_programs=("ghostty")
+for cask_program in "${cask_programs[@]}"; do
+  echo "Looking out for $cask_program..."
+  if [ command -v "$cask_program" ] >/dev/null 2>&1; then
+    echo "$cask_program is installed>"
+    echo
+  else
+    brew install --cask "$cask_program"
+  fi
+done
+
 dotfiles=("nvim" "starship" "wezterm" "zsh")
 
 for dotfile in "${dotfiles[@]}"; do
