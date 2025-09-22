@@ -29,7 +29,7 @@ for cask_program in "${cask_programs[@]}"; do
   fi
 done
 
-dotfiles=("nvim" "starship" "wezterm" "zsh")
+dotfiles=("ghostty" "nvim" "starship" "wezterm" "zsh")
 
 for dotfile in "${dotfiles[@]}"; do
   echo "Processing $dotfile..."
