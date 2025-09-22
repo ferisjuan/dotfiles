@@ -4,10 +4,15 @@ keybind = cmd+D=unbind
 
 keybind = alt+d=new_split:down
 keybind = alt+D=new_split:right
+
 keybind = alt+h=goto_split:left
+keybind = alt+cmd+h=resize_split:left,20
 keybind = alt+l=goto_split:right
+keybind = alt+cmd+l=resize_split:right,20
 keybind = alt+j=goto_split:down
+keybind = alt+cmd+j=resize_split:down,20
 keybind = alt+k=goto_split:up
+keybind = alt+cmd+k=resize_split:up,20
 keybind = cmd+alt+r=reload_config
 keybind = cmd+alt+o=open_config
 
