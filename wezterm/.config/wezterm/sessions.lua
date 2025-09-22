@@ -34,12 +34,19 @@ wezterm.on("gui-startup", function(cmd)
 
 		project_tab:set_title("Editor")
 		project_pane:send_text("nv\n")
+		project_pane:split({
+			direction = "Right",
+			size = 0.33,
+		})
 
 		local term_tab = project_window:spawn_tab({ cwd = local_dir })
 		term_tab:set_title("Term")
 
 		local term_pane = term_tab:active_pane()
 		term_pane:split({ direction = "Top", size = 0.6 })
+
+		project_tab:activate()
+		project_pane:activate()
 	end
 
 	mux.set_active_workspace("dotfiles")

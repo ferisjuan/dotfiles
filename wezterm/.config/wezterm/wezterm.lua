@@ -64,12 +64,12 @@ config.keys = {
 	},
 	{
 		mods = "LEADER",
-		key = "p",
+		key = "i",
 		action = act.ActivateTabRelative(-1),
 	},
 	{
 		mods = "LEADER",
-		key = "n",
+		key = "d",
 		action = act.ActivateTabRelative(1),
 	},
 	{
@@ -83,43 +83,43 @@ config.keys = {
 		action = act.SplitVertical({ domain = "CurrentPaneDomain" }),
 	},
 	{
-		mods = "SHIFT|ALT",
+		mods = "ALT",
 		key = "h",
 		action = act.ActivatePaneDirection("Left"),
 	},
 	{
-		mods = "SHIFT|ALT",
-		key = "j",
+		mods = "ALT",
+		key = "t",
 		action = act.ActivatePaneDirection("Down"),
 	},
 	{
-		mods = "SHIFT|ALT",
-		key = "k",
+		mods = "ALT",
+		key = "n",
 		action = act.ActivatePaneDirection("Up"),
 	},
 	{
-		mods = "SHIFT|ALT",
+		mods = "ALT",
 		key = "s",
 		action = act.ActivatePaneDirection("Right"),
 	},
 	{
-		mods = "ALT",
-		key = "LeftArrow",
+		mods = "CMD|ALT",
+		key = "h",
 		action = act.AdjustPaneSize({ "Left", 10 }),
 	},
 	{
-		mods = "ALT",
-		key = "DownArrow",
+		mods = "CMD|ALT",
+		key = "t",
 		action = act.AdjustPaneSize({ "Down", 10 }),
 	},
 	{
-		mods = "ALT",
-		key = "UpArrow",
+		mods = "CMD|ALT",
+		key = "n",
 		action = act.AdjustPaneSize({ "Up", 10 }),
 	},
 	{
-		mods = "ALT",
-		key = "RightArrow",
+		mods = "CMD|ALT",
+		key = "s",
 		action = act.AdjustPaneSize({ "Right", 10 }),
 	},
 	-- Create a new workspace with a random name and switch to it
@@ -127,13 +127,13 @@ config.keys = {
 
 	--#region smart workspace switcher
 	{
-		key = "[",
 		mods = "LEADER",
+		key = "[",
 		action = workspace_switcher.switch_to_prev_workspace(),
 	},
 	{
-		key = "]",
 		mods = "LEADER",
+		key = "]",
 		action = workspace_switcher.switch_to_prev_workspace(),
 	},
 	--#endregion
@@ -157,7 +157,7 @@ config.keys = {
 		action = resurrect.tab_state.save_tab_action(),
 	},
 	{
-		key = "s",
+		key = "l",
 		mods = "ALT",
 		action = wezterm.action_callback(function(win, pane)
 			resurrect.state_manager.save_state(resurrect.workspace_state.get_workspace_state())
