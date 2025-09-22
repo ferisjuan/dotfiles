@@ -1,0 +1,57 @@
+# unbindings
+keybind = cmd+d=unbind
+keybind = cmd+D=unbind
+
+keybind = alt+d=new_split:down
+keybind = alt+D=new_split:right
+keybind = alt+h=goto_split:left
+keybind = alt+l=goto_split:right
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
+keybind = cmd+alt+r=reload_config
+keybind = cmd+alt+o=open_config
+
+font-family=""
+font-family = Hack Nerd Font Mono
+font-feature=calt, liga, dlig
+font-size = 16
+
+background-blur = 4
+background-opacity = 0.85
+clipboard-read = allow
+clipboard-write = allow
+maximize = true
+mouse-hide-while-typing = true
+shell-integration = zsh
+window-height = 72
+window-new-tab-position = end
+window-save-state = always
+window-subtitle = working-directory
+window-theme = dark
+window-width = 218
+working-directory = ~/wps
+
+theme = TokyoNight
+background = #1a1b26
+foreground = #c0caf5
+selection-background = #33467c
+selection-foreground = #c0caf5
+cursor-color = #c0caf5
+cursor-text = #15161e
+palette = 0=#15161e
+palette = 1=#f7768e
+palette = 2=#9ece6a
+palette = 3=#e0af68
+palette = 4=#7aa2f7
+palette = 5=#bb9af7
+palette = 6=#7dcfff
+palette = 7=#a9b1d6
+palette = 8=#414868
+palette = 9=#f7768e
+palette = 10=#9ece6a
+palette = 11=#e0af68
+palette = 12=#7aa2f7
+palette = 13=#bb9af7
+palette = 14=#7dcfff
+palette = 15=#c0caf5
+
