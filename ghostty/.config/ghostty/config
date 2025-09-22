@@ -12,9 +12,9 @@ keybind = cmd+alt+r=reload_config
 keybind = cmd+alt+o=open_config
 
 font-family=""
-font-family = Hack Nerd Font Mono
-font-feature=calt, liga, dlig
-font-size = 16
+font-family = CaskaydiaCove Nerd Font Mono
+font-feature = calt, liga, dlig
+font-size = 18
 
 background-blur = 4
 background-opacity = 0.85
