@@ -9,26 +9,12 @@ if true then return {} end
 -- * disable/enabled LazyVim plugins
 -- * override the configuration of LazyVim plugins
 return {
-  -- add gruvbox
-  { "ellisonleao/gruvbox.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox",
-    },
-  },
-
   -- change trouble config
   {
     "folke/trouble.nvim",
     -- opts will be merged with the parent spec
     opts = { use_diagnostic_signs = true },
   },
-
-  -- disable trouble
-  { "folke/trouble.nvim", enabled = false },
 
   -- add symbols-outline
   {
@@ -80,19 +66,6 @@ return {
       config = function()
         require("telescope").load_extension("fzf")
       end,
-    },
-  },
-
-  -- add pyright to lspconfig
-  {
-    "neovim/nvim-lspconfig",
-    ---@class PluginLspOpts
-    opts = {
-      ---@type lspconfig.options
-      servers = {
-        -- pyright will be automatically installed with mason and loaded with lspconfig
-        pyright = {},
-      },
     },
   },
 
@@ -173,13 +146,13 @@ return {
   },
 
   -- the opts function can also be used to change the default opts:
-  {
-    "nvim-lualine/lualine.nvim",
-    event = "VeryLazy",
-    opts = function(_, opts)
-      table.insert(opts.sections.lualine_x, "😄")
-    end,
-  },
+  -- {
+  --   "nvim-lualine/lualine.nvim",
+  --   event = "VeryLazy",
+  --   opts = function(_, opts)
+  --     table.insert(opts.sections.lualine_x, "😄")
+  --   end,
+  -- },
 
   -- or you can return new options to override all the defaults
   {
