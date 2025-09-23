@@ -1,20 +1,34 @@
 # unbindings
-keybind = cmd+d=unbind
-keybind = cmd+D=unbind
+keybind = super+d=unbind
+keybind = super+shift+D=unbind
+keybind = super+alt+shift+h=unbind
+keybind = super+w=unbind
+keybind = super+alt+arrow_down=unbind
+keybind = super+alt+arrow_left=unbind
+keybind = super+alt+arrow_right=unbind
+keybind = super+alt+arrow_up=unbind
+keybind = super+alt+i=unbind
 
+# bindings
+keybind = super+w=close_surface
 keybind = alt+d=new_split:down
-keybind = alt+D=new_split:right
+keybind = alt+shift+d=new_split:right
 
+# navigate surfaces
 keybind = alt+h=goto_split:left
-keybind = alt+cmd+h=resize_split:left,20
-keybind = alt+l=goto_split:right
-keybind = alt+cmd+l=resize_split:right,20
 keybind = alt+j=goto_split:down
-keybind = alt+cmd+j=resize_split:down,20
 keybind = alt+k=goto_split:up
-keybind = alt+cmd+k=resize_split:up,20
-keybind = cmd+alt+r=reload_config
-keybind = cmd+alt+o=open_config
+keybind = alt+l=goto_split:right
+
+# resize surfaces
+keybind = alt+super+h=resize_split:left,20
+keybind = alt+super+j=resize_split:down,20
+keybind = alt+super+k=resize_split:up,20
+keybind = alt+super+l=resize_split:right,20
+
+# config
+keybind = super+alt+r=reload_config
+keybind = super+alt+o=open_config
 
 font-family=""
 font-family = CaskaydiaCove Nerd Font Mono
@@ -23,7 +37,9 @@ font-size = 18
 adjust-cell-height = 4
 
 background-blur = 4
-background-opacity = 0.85
+background-opacity = 0.90
+background-blur=10
+unfocused-split-opacity=0.3
 clipboard-read = allow
 clipboard-write = allow
 maximize = true
@@ -35,7 +51,7 @@ window-save-state = always
 window-subtitle = working-directory
 window-theme = dark
 window-width = 218
-working-directory = ~/wps
+working-directory = ~/wsp
 
 theme = TokyoNight
 background = #1a1b26
