@@ -20,6 +20,7 @@ font-family=""
 font-family = CaskaydiaCove Nerd Font Mono
 font-feature = calt, liga, dlig
 font-size = 18
+adjust-cell-height = 4
 
 background-blur = 4
 background-opacity = 0.85
