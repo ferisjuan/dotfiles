@@ -1,12 +1,8 @@
 # unbindings
-keybind = super+d=unbind
-keybind = super+shift+D=unbind
-keybind = super+alt+shift+h=unbind
+keybind = cmd+d=unbind
+keybind = cmd+shift+D=unbind
+keybind = cmd+alt+shift+h=unbind
 keybind = super+w=unbind
-keybind = super+alt+arrow_down=unbind
-keybind = super+alt+arrow_left=unbind
-keybind = super+alt+arrow_right=unbind
-keybind = super+alt+arrow_up=unbind
 keybind = super+alt+i=unbind
 
 # bindings
@@ -21,10 +17,10 @@ keybind = alt+k=goto_split:up
 keybind = alt+l=goto_split:right
 
 # resize surfaces
-keybind = alt+super+h=resize_split:left,20
-keybind = alt+super+j=resize_split:down,20
-keybind = alt+super+k=resize_split:up,20
-keybind = alt+super+l=resize_split:right,20
+keybind = super+h=resize_split:left,20
+keybind = super+j=resize_split:down,20
+keybind = super+k=resize_split:up,20
+keybind = super+l=resize_split:right,20
 
 # config
 keybind = super+alt+r=reload_config

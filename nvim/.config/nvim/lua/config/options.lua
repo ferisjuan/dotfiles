@@ -3,3 +3,12 @@
 -- Add any additional options here
 vim.g.terminal_emulator = "wezterm"
 vim.g.lazyvim_prettier_needs_config = true
+vim.g.lazyvim_ruby_lsp = "ruby_lsp"
+vim.g.lazyvim_ruby_formater = "rubocop"
+
+vim.filetype.add({
+  filename = {
+    ["Podfile"] = "ruby",
+    ["Podfile.lock"] = "ruby",
+  },
+})
