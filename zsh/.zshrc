@@ -140,3 +140,4 @@ esac
 eval "$(enable-fzf-tab)"
 eval "$(zoxide init zsh)"
 # end evals
+eval "$(rbenv init - zsh)"
