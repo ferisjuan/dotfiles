@@ -15,16 +15,16 @@ keybind = alt+d=new_split:down
 keybind = alt+shift+d=new_split:right
 
 # navigate surfaces
-keybind = alt+h=goto_split:left
-keybind = alt+j=goto_split:down
-keybind = alt+k=goto_split:up
-keybind = alt+l=goto_split:right
+keybind = alt+arrow_left=goto_split:left
+keybind = alt+arrow_down=goto_split:down
+keybind = alt+arrow_up=goto_split:up
+keybind = alt+arrow_right=goto_split:right
 
 # resize surfaces
-keybind = alt+super+h=resize_split:left,20
-keybind = alt+super+j=resize_split:down,20
-keybind = alt+super+k=resize_split:up,20
-keybind = alt+super+l=resize_split:right,20
+keybind = super+arrow_left=resize_split:left,20
+keybind = super+arrow_down=resize_split:down,20
+keybind = super+arrow_up=resize_split:up,20
+keybind = super+arrow_right=resize_split:right,20
 
 # config
 keybind = super+alt+r=reload_config
@@ -34,12 +34,12 @@ font-family=""
 font-family = CaskaydiaCove Nerd Font Mono
 font-feature = calt, liga, dlig
 font-size = 18
-adjust-cell-height = 4
+adjust-cell-height = 2
 
 background-blur = 4
 background-opacity = 0.90
 background-blur=10
-unfocused-split-opacity=0.3
+unfocused-split-opacity=0.9
 clipboard-read = allow
 clipboard-write = allow
 maximize = true
