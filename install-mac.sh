@@ -5,7 +5,7 @@ if ! command -v brew >/dev/null 2>&1; then
   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
-programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm" "luaver")
+programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm" "luaver" "watchman" "xcodesorg/made/xcodes" "docker")
 for program in "${programs[@]}"; do
   echo "Looking out for $program..."
   if [ command -v "$program" ] >/dev/null 2>&1; then
@@ -17,8 +17,7 @@ for program in "${programs[@]}"; do
 done
 
 # cask
-
-cask_programs=("ghostty")
+cask_programs=("ghostty" "brave-browser" "dbeaver-community" "zulu@17" "microsoft-teams" "postman" "protonvpn" "obsidian" "zoom" "omnidisksweeper")
 for cask_program in "${cask_programs[@]}"; do
   echo "Looking out for $cask_program..."
   if [ command -v "$cask_program" ] >/dev/null 2>&1; then
@@ -29,7 +28,7 @@ for cask_program in "${cask_programs[@]}"; do
   fi
 done
 
-dotfiles=("ghostty" "nvim" "starship" "wezterm" "zsh")
+dotfiles=("ghostty" "nvim" "starship" "zsh")
 
 for dotfile in "${dotfiles[@]}"; do
   echo "Processing $dotfile..."

@@ -67,7 +67,7 @@ alias c="clear"
 alias ll="ls"
 alias lla="ls -a"
 alias ls="eza --icons=always"
-alias nv="~/.local/share/bob/nvim-bin/nvim"
+alias nv="~/.local/share/bob/v0.11.4/bin/nvim"
 alias py="python3"
 alias sz="source ~/.zshrc"
 alias yd="yarn dev"
@@ -93,6 +93,7 @@ export PATH=$PATH:$ANDROID_HOME/emulator
 export PATH=$PATH:$ANDROID_HOME/platform-tools
 export PATH=/opt/homebrew/bin:$PATH
 export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+export PATH="/opt/homebrew/sbin:$PATH" >> ~/.zshrc
 
 # Editor
 export REACT_EDITOR="nv"
@@ -106,37 +107,11 @@ export REACT_EDITOR="nv"
   [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
   [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
   nvm use --lts
-# }
-#
-# __work() {
-#     for label in "${__lazyLoadLabels[@]}"; do
-#         unset -f $label
-#     done
-#     unset -v __lazyLoadLabels
-#
-#     __load-nvm
-#     unset -f __load-nvm __work
-# }
-#
-# for label in "${__lazyLoadLabels[@]}"; do
-#     eval "$label() { __work; $label \$@; }"
-# done
 
 # set lua to luaver
 [ -s "~/.luaver/luaver" ] && . '~/.luaver/luaver'
 [ -s "~/.luaver/completions/luaver.bash" ] && \. "~/.luaver/completions/luaver.bash"
- # if which luaver > /dev/null; then . `which luaver`; fi
-# end luaver
-
-# pnpm
-export PNPM_HOME="/Users/juan/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
 
 # evals
 eval "$(enable-fzf-tab)"
 eval "$(zoxide init zsh)"
-# end evals
