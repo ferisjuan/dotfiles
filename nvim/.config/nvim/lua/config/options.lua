@@ -17,3 +17,6 @@ vim.filetype.add({
     ["Podfile.lock"] = "ruby",
   },
 })
+
+-- use fzf
+vim.opt.rtp:append("/opt/homebrew/opt/fzf")

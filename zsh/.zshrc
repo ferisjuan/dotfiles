@@ -67,7 +67,7 @@ alias c="clear"
 alias ll="ls"
 alias lla="ls -a"
 alias ls="eza --icons=always"
-alias nv="~/.local/share/bob/v0.11.4/bin/nvim"
+alias nv="~/.local/share/bob/v0.11.5/bin/nvim"
 alias py="python3"
 alias sz="source ~/.zshrc"
 alias yd="yarn dev"
@@ -111,6 +111,11 @@ export REACT_EDITOR="nv"
 # set lua to luaver
 [ -s "~/.luaver/luaver" ] && . '~/.luaver/luaver'
 [ -s "~/.luaver/completions/luaver.bash" ] && \. "~/.luaver/completions/luaver.bash"
+
+# Ngrok
+if command -v ngrok &>/dev/null; then
+  eval "$(ngrok completion)"
+fi
 
 # evals
 eval "$(enable-fzf-tab)"

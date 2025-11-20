@@ -1,11 +1,5 @@
 #!/bin/bash
-
-if ! command -v brew >/dev/null 2>&1; then
-  echo "Homebrew is not installed. Install Homebrew first..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
-
-programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm" "luaver" "watchman" "xcodesorg/made/xcodes" "docker")
+programs=("stow" "fzf" "zoxide" "eza" "rbenv" "nvm" "luaver" "watchman" "xcodesorg/made/xcodes" "docker" "zsh" "bob")
 for program in "${programs[@]}"; do
   echo "Looking out for $program..."
   if [ command -v "$program" ] >/dev/null 2>&1; then
@@ -17,7 +11,7 @@ for program in "${programs[@]}"; do
 done
 
 # cask
-cask_programs=("ghostty" "brave-browser" "dbeaver-community" "zulu@17" "microsoft-teams" "postman" "protonvpn" "obsidian" "zoom" "omnidisksweeper")
+cask_programs=("ghostty" "brave-browser" "dbeaver-community" "zulu@17" "microsoft-teams" "postman" "protonvpn" "obsidian" "zoom" "omnidisksweeper" "ngrok")
 for cask_program in "${cask_programs[@]}"; do
   echo "Looking out for $cask_program..."
   if [ command -v "$cask_program" ] >/dev/null 2>&1; then
@@ -34,5 +28,5 @@ for dotfile in "${dotfiles[@]}"; do
   echo "Processing $dotfile..."
   # Replace 'your_command' with the actual command you want to run
   # and use '$dotfile' to reference the current dotfile in the loop.
-  stow "$dotfile"
+  stow -S "$dotfile"
 done
