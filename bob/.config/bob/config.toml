@@ -1,0 +1,11 @@
+{
+  "enable_nightly_info": true, // Will show new commits associated with new nightly release if enabled
+  "enable_release_build": false, // Compile neovim nightly or a certain hash version as a release build (slightly improved performance, no debug info)
+  "downloads_location": "$HOME/.local/share/bob", // The folder in which neovim versions will be installed too, bob will error if this option is specified but the folder doesn't exist
+  "installation_location": "/home/user/.local/share/bob/nvim-bin", // The path in which the used neovim version will be located in
+  "version_sync_file_location": "/home/user/.config/nvim/nvim.version", // The path to a file that will hold the neovim version string, useful for config version tracking, bob will error if the specified file is not a valid file path
+  "rollback_limit": 3, // The amount of rollbacks before bob starts to delete older ones, can be up to 225
+  "github_mirror": "https://github.com", // github or github mirror
+  "add_neovim_binary_to_path": true, // Whether bob should automatically add the neovim proxy to the system PATH
+  "ignore_running_instances": false // If true, bob will block certain actions while Neovim is running
+}
