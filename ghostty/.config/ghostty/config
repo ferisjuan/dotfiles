@@ -37,8 +37,8 @@ font-size = 18
 adjust-cell-height = 2
 
 background-blur = 4
-background-opacity = 0.90
-background-blur=10
+background-opacity = 0.92
+background-blur=20
 unfocused-split-opacity=0.9
 clipboard-read = allow
 clipboard-write = allow
@@ -77,3 +77,4 @@ palette = 13=#bb9af7
 palette = 14=#7dcfff
 palette = 15=#c0caf5
 
+keybind = shift+enter=text:\x1b\r
