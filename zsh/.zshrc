@@ -1,53 +1,39 @@
-# # Setup Zinit Home
+# Setup Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-
-# # Download Zinit if not there yet
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-
-# # Source Zinit
+if [ ! -d "$ZINIT_HOME" ]; then
+  mkdir -p "$(dirname "$ZINIT_HOME")"
+  git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
 source "${ZINIT_HOME}/zinit.zsh"
-#
-# # ice adds a temporary modifier to a next zinit command
-# # Load starship theme
-# # line 1: `starship` binary as command, from github release
-# # line 2: starship setup at clone(create init.zsh, completion)
-# # line 3: pull behavior same as clone, source init.zsh
+
+# Load plugins
+zinit light zsh-users/zsh-syntax-highlighting
+zinit light zsh-users/zsh-autosuggestions
+zinit light Aloxaf/fzf-tab
+
+# Starship prompt
 zinit ice as"command" from"gh-r" \
           atclone"./starship init zsh > init.zsh; ./starship completions zsh > _starship" \
           atpull"%atclone" src"init.zsh"
 zinit light starship/starship
 
-# Load completions
+# OMZ Git plugin
+zinit snippet OMZP::git
+
+# Initialize completions
 autoload -U compinit && compinit
 
-# Cache completions
-zinit cdreplay -q
-
-# # Plugins
-zinit light zsh-users/zsh-syntax-highlighting
-zinit light zsh-users/zsh-completions
-zinit light zsh-users/zsh-autosuggestions
-zinit light Aloxaf/fzf-tab
+# History
+HISTSIZE=5000
+SAVEHIST=$HISTSIZE
+HISTFILE=~/.zsh_history
+setopt appendhistory hist_ignore_all_dups hist_ignore_space sharehistory hist_find_no_dups
 
 # Keybindings
 bindkey -e
 bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
 bindkey '\t' complete-word
-
-# History
-HISTSIZE=5000
-HISTFILE=~/.zsh_history
-SAVEHIST=$HISTSIZE
-HISTDUP=erase
-setopt appendhistory
-setopt hist_ignore_all_dups
-setopt hist_ignore_dups
-setopt hist_ignore_space
-setopt hist_save_no_dups
-setopt sharehistory
-setopt hist_find_no_dups
 
 # Completion styling
 zstyle ':completion:*' menu no
@@ -59,14 +45,11 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'eza -1 --color=always $realpath'
 zstyle ':fzf-tab:*' fzf-flags --color=fg:1,fg+:2 --bind=tab:accept
 zstyle ':fzf-tab:*' switch-group '<' '>'
 
-# Add in snippets
-zinit snippet OMZP::git
-
-# Alias
+# Aliases
 alias c="clear"
-alias ll="ls"
-alias lla="ls -a"
-alias ls="eza --icons=always"
+alias gpush="git push -u origin \"$(git rev-parse --abbrev-ref HEAD)\""
+alias ll="eza --icons=always"
+alias lla="eza --icons=always -a"
 alias nv="~/.local/share/bob/v0.11.5/bin/nvim"
 alias py="python3"
 alias sz="source ~/.zshrc"
@@ -79,44 +62,60 @@ alias ycp="yarn commit; git push"
 alias ycpnv="yarn commit --no-verify; git push --no-verify"
 alias ys="yarn start"
 
-# Homes
+# Environment variables
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export BOB_CONFIG=$HOME/.config/bob/config.json
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 export NVM_DIR="$HOME/.nvm"
-
-# Paths
-export PATH="$HOME/.bin:$PATH"
-export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH=$JAVA_HOME/bin:$PATH
-export PATH=$PATH:$ANDROID_HOME/emulator
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-export PATH=/opt/homebrew/bin:$PATH
-export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
-export PATH="/opt/homebrew/sbin:$PATH" >> ~/.zshrc
-
-# Editor
+export VOLTA_HOME="$HOME/.volta"
+export BUN_INSTALL="$HOME/.bun"
+export PNPM_HOME="/Users/juan/Library/pnpm"
+export PYENV_ROOT="$HOME/.pyenv"
 export REACT_EDITOR="nv"
 
-# # Tokens
+# Consolidated PATH
+export PATH="$HOME/.bin:$PATH"
+export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH="$JAVA_HOME/bin:$PATH"
+export PATH="$ANDROID_HOME/emulator:$PATH"
+export PATH="$ANDROID_HOME/platform-tools:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
+export PATH="$BUN_INSTALL/bin:$PATH"
+export PATH="$PNPM_HOME:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
+[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
+
+# Load tokens if exists
 [ -f ~/.tokens ] && source ~/.tokens
 
-# typeset -ga __lazyLoadLabels=(nvm node npm npx pnpm yarn pnpx bun bunx)
-# __load-nvm() {
+# Lazy load Node.js tools
+nvm() {
+  unset -f nvm node npm npx pnpm yarn pnpx bun bunx
   export NVM_DIR="$HOME/.nvm"
-  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
-  nvm use --lts
+  [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"
+  [ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && \. "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"
+  nvm use --lts >/dev/null 2>&1
+  nvm "$@"
+}
 
-# set lua to luaver
-[ -s "~/.luaver/luaver" ] && . '~/.luaver/luaver'
-[ -s "~/.luaver/completions/luaver.bash" ] && \. "~/.luaver/completions/luaver.bash"
+# Initialize tools (only when needed)
+if command -v pyenv &>/dev/null; then
+  eval "$(pyenv init - zsh)"
+fi
 
-# Ngrok
 if command -v ngrok &>/dev/null; then
   eval "$(ngrok completion)"
 fi
 
-# evals
+# Initialize fzf-tab and zoxide
 eval "$(enable-fzf-tab)"
 eval "$(zoxide init zsh)"
+
+# Bun completions
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/juan/.lmstudio/bin"
+# End of LM Studio CLI section
+
