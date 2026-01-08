@@ -36,10 +36,9 @@ font-feature = calt, liga, dlig
 font-size = 18
 adjust-cell-height = 2
 
-background-blur = 4
-background-opacity = 0.92
-background-blur=20
-unfocused-split-opacity=0.9
+background-blur = 5
+background-opacity = 0.94
+unfocused-split-opacity=0.3
 clipboard-read = allow
 clipboard-write = allow
 maximize = true
