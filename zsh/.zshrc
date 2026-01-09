@@ -1,12 +1,16 @@
 # Setup Zinit
 ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-if [ ! -d "$ZINIT_HOME/.git" ]; then
+if [ ! -d "$ZINIT_HOME" ]; then
   mkdir -p "$(dirname "$ZINIT_HOME")"
   git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 fi
+
 source "${ZINIT_HOME}/zinit.zsh"
 
-# Initialize completions FIRST
+# OMZ Git plugin
+zinit snippet OMZP::git
+
+# Initialize completions
 autoload -U compinit && compinit
 
 # Load plugins
@@ -31,7 +35,6 @@ setopt appendhistory hist_ignore_all_dups hist_ignore_space sharehistory hist_fi
 bindkey -e
 bindkey "^p" history-search-backward
 bindkey "^n" history-search-forward
-# Removed conflicting Tab binding to let fzf-tab handle it
 
 # Completion styling
 zstyle ':completion:*' menu no
@@ -49,13 +52,16 @@ export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH="$JAVA_HOME/bin:$PATH"
 export PATH="$ANDROID_HOME/emulator:$PATH"
 export PATH="$ANDROID_HOME/platform-tools:$PATH"
-export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
-export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/Users/juan/.lmstudio/bin:$PATH"  # Keep if you use LM Studio
+export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
 
 # Environment variables (quoted properly)
 export ANDROID_HOME="$HOME/Library/Android/sdk"
@@ -90,6 +96,9 @@ alias ys="yarn start"
 # Load tokens if exists
 [ -f ~/.tokens ] && source ~/.tokens
 
+# Bun completions (AFTER PATH includes bun)
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
+
 # Lazy load Node.js tools (fixed unsets)
 nvm() {
   unset -f nvm node npm npx pnpm yarn pnpx bun bunx 2>/dev/null || true
@@ -113,8 +122,7 @@ fi
 eval "$(zoxide init zsh)"
 eval "$(enable-fzf-tab)"
 
-# Bun completions (AFTER PATH includes bun)
-[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # rbenv (moved up from bottom)
 eval "$(rbenv init - zsh)"
+
