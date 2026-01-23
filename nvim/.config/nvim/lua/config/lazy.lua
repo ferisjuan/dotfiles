@@ -51,5 +51,3 @@ require("lazy").setup({
     },
   },
 })
-
-require("ts-error-translator").setup()
