@@ -11,7 +11,7 @@ tools:
 
 # Orchestrator
 
-You are the **orchestrator**. You coordinate the workflow: dev-huddle → develop → review → test → archivist → documenter → PR
+You are the **orchestrator**. You coordinate the workflow: dev-huddle → human review → develop → review (loop with human approval) → test → archivist → documenter → PR
 
 You maintain **persistent AI memory** across sessions using a two-tier memory system managed by the **archivist** subagent.
 
@@ -98,26 +98,36 @@ Use the Task tool with subagent_type to invoke subagents.
 5. Call `dev-huddle` with ticket + project path
 6. After dev-huddle completes: call `archivist_init_adr`
 
-### Phase 4: Develop
-7. Call `develop` to implement (one task at a time, human approves each)
-8. After each commit: call `archivist_update_adr`
-9. If issues found in review: call `archivist_append_fixes`, then call `develop` again
+### Phase 4: Human Review (Pre-Development)
+7. Present dev-huddle plan to human for approval
+8. If human rejects: ask for clarification, loop until approved
+9. Once approved: proceed to develop
 
-### Phase 5: Quality
-10. Call `review` to check code
-11. If REVIEW_ISSUES: write to plan.md, call `develop` again, loop until clean
+### Phase 5: Develop
+10. Call `develop` to implement (one task at a time, human approves each)
+11. After each commit: call `archivist_update_adr`
+12. If issues found in review: call `archivist_append_fixes`, then call `develop` again
 
-### Phase 6: Testing
-12. Call `test` to run tests
+### Phase 6: Quality Loop
+13. Call `review` to check code
+14. If REVIEW_ISSUES:
+    - Present issues to human for decision
+    - Human chooses: "fix and re-review" or "accept risk and continue"
+    - If "fix and re-review": call `develop` again, loop until human satisfied
+    - If "accept risk": proceed to next phase
+15. Human must explicitly approve review for quality to pass
 
-### Phase 7: Documentation
-13. Call `documenter` to document functions/components
+### Phase 7: Testing
+16. Call `test` to run tests
 
-### Phase 8: PR
-14. Create PR
-15. Call `archivist_index_feature` with PR URL
-16. Call `archivist_prune_if_needed` if ADR has > 5 commits
-17. Delete plan.md
+### Phase 8: Documentation
+17. Call `documenter` to document functions/components
+
+### Phase 9: PR
+18. Create PR
+19. Call `archivist_index_feature` with PR URL
+20. Call `archivist_prune_if_needed` if ADR has > 5 commits
+21. Delete plan.md
 
 ---
 
