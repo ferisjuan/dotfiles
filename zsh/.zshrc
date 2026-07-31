@@ -66,6 +66,7 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # Environment variables (quoted properly)
 export ANDROID_HOME="$HOME/Library/Android/sdk"
 export BOB_CONFIG="$HOME/.config/bob/config.json"
+export PATH="$HOME/.local/share/bob/nvim-bin:$PATH"
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 export NVM_DIR="$HOME/.nvm"
 export VOLTA_HOME="$HOME/.volta"
