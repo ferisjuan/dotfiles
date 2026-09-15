@@ -55,6 +55,7 @@ export PATH="$ANDROID_HOME/platform-tools:$PATH"
 export PATH="$BUN_INSTALL/bin:$PATH"
 export PATH="$PNPM_HOME:$PATH"
 export PATH="$HOME/.local/bin:$PATH"
+export PATH="/Users/juan/Library/pnpm:$PATH"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 export PATH="/Users/juan/.lmstudio/bin:$PATH"  # Keep if you use LM Studio
 export PATH="/Applications/WezTerm.app/Contents/MacOS:$PATH"
@@ -79,10 +80,13 @@ export REACT_EDITOR="nv"
 # Aliases
 alias c="clear"
 alias gpush="git push -u origin \"\$(git rev-parse --abbrev-ref HEAD)\""
+alias gmm="git merge main"
 alias ll="eza --icons=always"
 alias lla="eza --icons=always -a"
 alias jupyter="uvx jupyter lab"
-alias nv="~/.local/share/bob/v0.11.5/bin/nvim"
+alias nv="~/.local/share/bob/nvim-bin/nvim"
+alias oc="opencode"
+alias occ="opencode -c"
 alias py="python3"
 alias sz="source ~/.zshrc"
 alias yd="yarn dev"
@@ -93,6 +97,7 @@ alias ycnv="yarn commit --no-verify"
 alias ycp="yarn commit; git push"
 alias ycpnv="yarn commit --no-verify; git push --no-verify"
 alias ys="yarn start"
+alias json2csv="node ~/dotfiles/json2csv.js"
 
 # Load tokens if exists
 [ -f ~/.tokens ] && source ~/.tokens
@@ -127,3 +132,14 @@ eval "$(enable-fzf-tab)"
 # rbenv (moved up from bottom)
 eval "$(rbenv init - zsh)"
 
+alias rm="rm -i"
+
+[[ "$TERM_PROGRAM" == "kiro" ]] && . "$(kiro --locate-shell-integration-path zsh)"
+
+# pnpm
+export PNPM_HOME="/Users/juan/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME/bin:"*) ;;
+  *) export PATH="$PNPM_HOME/bin:$PATH" ;;
+esac
+# pnpm end

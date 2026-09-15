@@ -49,11 +49,31 @@ git diff origin/main...HEAD
 
 From the diff, create three mermaid charts:
 
+**CRITICAL — Mermaid GitHub Rendering Rule:**
+GitHub's Mermaid renderer does NOT support these characters in node IDs:
+- Parentheses `()` — causes "Unable to render rich display" parse error
+- Slashes `/` — treated as path separators, breaks node ID
+- Dots `.` — causes parse errors
+- Hyphens `-` — may work in some contexts but avoid for node IDs
+- Spaces and special chars
+
+**Sanitization approach:** Replace ALL special characters with underscores. Keep only alphanumeric + underscore in node IDs. If a file path like `src/routes/(protected)/clinic-management/-index.lazy.tsx` appears in a diagram, it MUST become something like `clinic_mgmt_page` or `index_tsx`.
+
+**Examples of valid sanitization:**
+- `src/routes/(protected)/clinic-management/-index.lazy.tsx` → `clinic_mgmt_index` or `clinic_management_page`
+- `src/components/organization/organization-form.tsx` → `org_form` or `organization_form`
+- `src/orpc/router/clinic.ts` → `clinic_router`
+- `prisma/schema.prisma` → `schema_prisma`
+- `src/routes/(protected)/-components/sidebar.tsx` → `sidebar`
+
 **1. Changes Flowchart:**
 
 ```mermaid
 flowchart TD
     %% Build from git diff - inserted/deleted functions and files
+    %% Use ONLY alphanumeric + underscore in node IDs
+    %% BAD: ClinicPage, clinic-management, organization-form.tsx
+    %% GOOD: clinic_page, clinic_mgmt, org_form
 ```
 
 **2. Modified Files:**
@@ -61,6 +81,7 @@ flowchart TD
 ```mermaid
 graph TD
     %% List modified files from git diff --stat
+    %% Use sanitized IDs - no parentheses, no slashes, no dots
 ```
 
 **3. App Workflow:**
@@ -68,6 +89,7 @@ graph TD
 ```mermaid
 sequenceDiagram
     %% Show the workflow based on changed files
+    %% Use sanitized IDs in participant names
 ```
 
 ### Step 5: Create or update PR
@@ -86,6 +108,8 @@ gh pr edit NUMBER --title "BRANCH_NAME" --body "DESCRIPTION_WITH_MERMAID"
 
 ## PR Body Template
 
+**IMPORTANT**: All node IDs in mermaid diagrams must be sanitized - no parentheses, slashes, dots, or special characters. Use alphanumeric + underscore only.
+
 ```markdown
 ## Summary
 
@@ -96,9 +120,18 @@ gh pr edit NUMBER --title "BRANCH_NAME" --body "DESCRIPTION_WITH_MERMAID"
 ```mermaid
 flowchart TD
     %% Dynamic content from diff
+    %% SANITIZE all node IDs: use underscores, remove special chars
     A[Start] --> B{Changed}
     B --> C[New Flow]
     B --> D[Modified Flow]
+```
+
+## Modified Files
+
+```mermaid
+graph LR
+    %% List modified files - sanitize paths as IDs
+    A[file_a] --> B[file_b]
 ```
 
 ## App Workflow

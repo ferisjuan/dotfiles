@@ -21,11 +21,16 @@ vim.filetype.add({
 vim.opt.rtp:append("/opt/homebrew/opt/fzf")
 
 -- Force UTF-8 position encoding for all LSP clients
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics,
-  {
-    virtual_text = true,
-    signs = true,
-    update_in_insert = false,
-  }
-)
+vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
+  virtual_text = true,
+  signs = true,
+  update_in_insert = false,
+})
+
+vim.filetype.add({
+  extension = {
+    ["md"] = "markdown",
+    jsx = "javascriptreact",
+    tsx = "typescriptreact",
+  },
+})

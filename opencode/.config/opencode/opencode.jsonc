@@ -1,5 +1,6 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  "lsp": true,
   "mcp": {
     "jira": {
       "type": "remote",
@@ -20,6 +21,46 @@
       "type": "remote",
       "url": "https://mcp.vercel.com",
       "oauth": {}
+    },
+    "crome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest",
+        "--autoConnect"
+      ]
     }
   },
+  "provider": {
+    "local-llama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama-server (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1",
+        "apiKey": "sk-no-key-required"
+      },
+      "models": {
+        "/Users/juan/.lmstudio/models/barozp/Qwen3.6-28B-REAP20-A3B-GGUF/Qwen3.6-28B-REAP20-A3B-Q3_K_S.gguf": {
+          "name": "Qwen3.6-28B-REAP20-A3B-GGUF (local)",
+          "limit": {
+            "context": 32768,
+            "output": 8192
+          }
+        }
+      }
+    },
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://127.0.0.1:1234/v1"
+      },
+      "models": {
+        "google/gemma-3n-e4b": {
+          "name": "google/gemma-4-e4b"
+        }
+      }
+    }
+  }
 }
