@@ -53,11 +53,16 @@ for cask_program in "${cask_programs[@]}"; do
   fi
 done
 
-dotfiles=("ghostty" "nvim" "starship" "zsh" "bob")
+dotfiles=("ghostty" "nvim" "starship" "zsh" "bob" "opencode")
 
 for dotfile in "${dotfiles[@]}"; do
   echo "Processing $dotfile..."
-  # Replace 'your_command' with the actual command you want to run
-  # and use '$dotfile' to reference the current dotfile in the loop.
   stow -S "$dotfile"
 done
+
+# Pi agents and skills live outside ~/.config, so use explicit target
+# See https://pi.dev for pi coding agent
+if [ -d "$HOME/dotfiles/pi" ]; then
+  echo "Processing pi..."
+  stow -S --target="$HOME/.pi/agent" pi
+fi
