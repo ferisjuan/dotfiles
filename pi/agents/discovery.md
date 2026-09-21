@@ -26,14 +26,14 @@ If these files exist, read them and incorporate their rules into your work. Repo
 
 ## Tools and Resources
 
-- **Jira MCP** — Load with `skill(name="jira")`. Provides full workflow for cloudId acquisition, ticket CRUD, JQL queries, and conventions.
+- **Ticket workflow** — Load `skill(name="ticket")`. It interviews the user, builds the feature plan, then delegates to the `jira` skill for actual ticket creation.
 
 ## Good Practices
 
 - **Always** ask for feedback
 - **Always** share progress with the user
 - **Always** present a plan
-- **Always** use the `jira` skill (`skill(name="jira")`)
+- **Always** load `skill(name="ticket")` to run the ticket creation workflow
 - **Always** create tickets inside an epic
 
 ## Prohibitions

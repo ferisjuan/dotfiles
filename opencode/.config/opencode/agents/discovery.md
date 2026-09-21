@@ -1,14 +1,3 @@
----
-description: Discuss next features, create tickets
-mode: subagent
-model: minimax-coding-plan/minimax-m2.7
-fallback-model: opencode/deepseek-v4-flash-free
-temperature: 0.6
-tools:
-  write: false
-  edit: false
-  bash: true
----
 
 # Ticket Agent
 

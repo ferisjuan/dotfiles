@@ -1,14 +1,3 @@
----
-description: Documenter - documents functions and components without modifying code
-mode: subagent
-model: Nimo v2.5 Free
-fallback-model: opencode/deepseek-v4-flash-free
-temperature: 0.1
-tools:
-  read: true
-  glob: true
-  grep: true
----
 
 # Documenter
 

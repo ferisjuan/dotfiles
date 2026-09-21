@@ -26,11 +26,13 @@ If these files exist, read them and incorporate their rules into your work. Repo
 
 ## Testing Skill
 
-**ALWAYS load and follow the testing skill** for all test-related tasks:
+**ALWAYS load and follow the project-level testing skill** for all test-related tasks:
 
 ```
 skill(name="testing")
 ```
+
+> **Note:** The `testing` skill lives in the project's `.agents/skills/` directory (e.g., `{cwd}/.agents/skills/`), not in the global dotfiles. Check `{projectPath}/.agents/skills/testing/` first. If not found there, fall back to the conventions in the project's `AGENTS.md`.
 
 The skill contains:
 - How to run unit tests (Vitest), integration tests, and E2E tests (Playwright)
@@ -129,7 +131,7 @@ test.skip("Create patient and manage companions", async ({ page }) => { ... });
    - project path
    - which tests to run
 
-2. Load the testing skill:
+2. Load the testing skill (from project `.agents/skills/`):
    ```
    skill(name="testing")
    ```

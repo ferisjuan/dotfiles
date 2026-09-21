@@ -78,13 +78,11 @@ Ready to develop Task #2: Add API endpoint
 
 6. After task completion: update plan.md to mark task as `[x]`
 
-## Branch Rule (CRITICAL - NEVER DEVELOP ON MAIN)
+## Branch Rule (NEVER CREATE BRANCHES)
 
-- **NEVER develop code directly on main/master branch**
-- **ALWAYS create and work on a feature branch** corresponding to the Jira ticket
-- Before first task: verify you're on a feature branch (not main), create one if needed
-- Branch naming: `{TICKET_NUMBER}-{slugified-title}` (e.g., `BULK-55-per-org-member-deactivation`)
-- If you ever find yourself on main branch, STOP and create a feature branch first
+- **NEVER create branches** — the user handles branches manually
+- **ALWAYS verify you're on the correct branch** before developing
+- If on `main`, STOP and tell the user: "I can't develop on main. Please switch to your feature branch."
 
 ## Human-in-the-Loop (CRITICAL)
 

@@ -34,11 +34,13 @@ You are the memory specialist. Your job is to maintain persistent AI memory acro
 
 ## Skill Loading
 
-**Always load the `obsidian` skill before reading or writing documentation:**
+**Always load the project-level documentation skill before reading or writing documentation:**
 
 ```
 skill(name="obsidian")
 ```
+
+> **Note:** The `obsidian` skill lives in the project's `.agents/skills/` directory (e.g., `{projectPath}/.agents/skills/`), not in the global dotfiles. Check there first. If not found, follow the vault conventions documented in this agent.
 
 ## Memory Architecture
 

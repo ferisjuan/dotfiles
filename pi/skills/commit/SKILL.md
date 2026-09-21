@@ -3,7 +3,7 @@ name: commit
 description: makes a commit
 ---
 
-## ticket
+## commit
 
 Use this skill to make a commit
 
@@ -11,29 +11,30 @@ Use this skill to make a commit
 
 - When an agent wants to commit code
 - When a subagent wants to commit code
-- When the user to commit code
+- When the user wants to commit code
 
 ### IMPORTANT
 
-- **ALWAYS** prefix the commit message with the Jira ticket code in brackets. Format: `[{JIRA-TICKET-CODE}] {type}: {message}` (e.g., `[BULK-60] refactor: add password visibility toggle`)
+- **ALWAYS** prefix the commit message with the Jira ticket code using `type(NN):` format. Format: `{type}({TICKET-NUMBER}): {message}` (e.g., `feat(60): add password visibility toggle`)
 - **ALWAYS** use one of these types: `feat`, `bug`, `chore`, `docs`, `test`, `refactor`, `style`, `ci`, `perf`
 - **Always** include the `JIRA ticket ID` in the commit body
 - **Always** include the `JIRA ticket summary` in the commit body
 - **Always** include a short and descriptive commit message
+- **NEVER** use bracket prefix format like `[BULK-60]` — this is rejected by the project's `commitlint` (`@commitlint/config-conventional`)
 
 ### Commit Message Format
 
 ```
-[{JIRA-TICKET-CODE}] {type}: {message}
+{type}({TICKET-NUMBER}): {lowercase message}
 
 JIRA: {JIRA-TICKET-CODE}
 Summary: {ticket summary}
 ```
 
 **Examples:**
-- `[BULK-60] refactor: move test files into __test__ directories per convention`
-- `[BULK-36] feat: add campaign router with oRPC`
-- `[BULK-38] feat: implement Wompi payment integration`
+- `feat(60): add password visibility toggle`
+- `refactor(36): move test files into __test__ directories per convention`
+- `feat(38): implement Wompi payment integration`
 
 ## Staging Policy — "Commit Everything, Change Nothing"
 
